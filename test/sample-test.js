@@ -23,4 +23,20 @@ describe("Mock", function () {
     const mockKey = 'test';
     expect(await mock.checkKey(mockKey)).to.equal(false);
   });
+
+  it("Should return true if claim method is called with solid proof", async function () {
+    const Mock = await ethers.getContractFactory("Mock");
+    const mock = await Mock.deploy();
+    await mock.deployed();
+    const mockProof = 'proof';
+    expect(await mock.claim(mockProof)).to.equal(true);
+  });
+
+  it("Should return false if claim method is called with not fitting proof", async function () {
+    const Mock = await ethers.getContractFactory("Mock");
+    const mock = await Mock.deploy();
+    await mock.deployed();
+    const mockProof = 'badProod';
+    expect(await mock.claim(mockProof)).to.equal(false);
+  });
 });

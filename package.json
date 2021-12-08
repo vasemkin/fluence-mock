@@ -10,7 +10,8 @@
     "chain" : "npx hardhat --verbose node",
     "deploy" : "npx hardhat run scripts/sample-script.js --network localhost",
     "console" : "npx hardhat console --network localhost",
-    "test" : "npx hardhat test"
+    "test" : "npx hardhat test",
+    "clean" : "npx hardhat clean --network localhost"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.0",
