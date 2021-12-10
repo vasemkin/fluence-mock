@@ -7,7 +7,7 @@ describe("Mock", function () {
     const mock = await Mock.deploy();
     await mock.deployed();
 
-    const mockKey = 'test';
+    const mockKey = 'test1';
     const setKeyTx = await mock.setKey(mockKey);
 
     // wait until the transaction is mined
@@ -20,7 +20,7 @@ describe("Mock", function () {
     const Mock = await ethers.getContractFactory("Mock");
     const mock = await Mock.deploy();
     await mock.deployed();
-    const mockKey = 'test';
+    const mockKey = 'test2';
     expect(await mock.checkKey(mockKey)).to.equal(false);
   });
 
@@ -36,5 +36,21 @@ describe("Mock", function () {
     await setKeyTx.wait();
 
     expect(await mock.proof()).to.equal(mockProof);
+  });
+
+  it("Should return true if checkProof method is called with solid proof", async function () {
+    const Mock = await ethers.getContractFactory("Mock");
+    const mock = await Mock.deploy();
+    await mock.deployed();
+    const mockProof = 'proof';
+    expect(await mock.checkProof(mockProof)).to.equal(true);
+  });
+
+  it("Should return false if checkProof method is called with not fitting proof", async function () {
+    const Mock = await ethers.getContractFactory("Mock");
+    const mock = await Mock.deploy();
+    await mock.deployed();
+    const mockProof = 'badProof';
+    expect(await mock.checkProof(mockProof)).to.equal(false);
   });
 });
