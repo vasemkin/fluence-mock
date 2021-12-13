@@ -36,6 +36,7 @@ contract Mock {
 
     function claim(string memory _proof) public {
         proof=_proof;
+        interactions[msg.sender]=true;
     }
 
     function checkKey(string memory _key) public view returns (bool){
