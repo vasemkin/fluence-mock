@@ -32,7 +32,7 @@ module.exports = {
       accounts: [
         {
           privateKey: METAMASK_KEY,
-          balance: '1000000000000000000000000'
+          balance: '2000000000000000000000000'
         }
       ],
       mining: {

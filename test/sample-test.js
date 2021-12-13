@@ -53,4 +53,22 @@ describe("Mock", function () {
     const mockProof = 'badProof';
     expect(await mock.checkProof(mockProof)).to.equal(false);
   });
+
+  it("Should return true if checkInteraction is called after setInteraction", async function () {
+    const Mock = await ethers.getContractFactory("Mock");
+    const mock = await Mock.deploy();
+    await mock.deployed();
+    
+    const iterTx = await mock.setInteraction();
+    await iterTx.wait()
+
+    expect(await mock.checkInteraction()).to.equal(true);
+  });
+
+  it("Should return false if checkInteraction is called before setInteraction", async function () {
+    const Mock = await ethers.getContractFactory("Mock");
+    const mock = await Mock.deploy();
+    await mock.deployed();
+    expect(await mock.checkInteraction()).to.equal(false);
+  });
 });

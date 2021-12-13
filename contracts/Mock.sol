@@ -5,6 +5,7 @@ import "hardhat/console.sol";
 
 contract Mock {
     mapping (string => bool) public githubKeys;
+    mapping (address => bool) public interactions;
     string public proof;
 
     constructor() {
@@ -23,6 +24,14 @@ contract Mock {
     function checkProof(string memory _proof) public pure returns (bool) {
         bool isEqual = compareStrings(_proof, 'proof');
         return isEqual;
+    }
+
+    function setInteraction() public {
+        interactions[msg.sender]=true;
+    }
+
+    function checkInteraction() public view returns (bool) {
+        return interactions[msg.sender];
     }
 
     function claim(string memory _proof) public {
