@@ -71,4 +71,16 @@ describe("Mock", function () {
     await mock.deployed();
     expect(await mock.checkInteraction()).to.equal(false);
   });
+
+  it("Should set delegatee if claimV2 is called", async function () {
+    const Mock = await ethers.getContractFactory("Mock");
+    const mock = await Mock.deploy();
+    await mock.deployed();
+    const signer = await ethers.getSigner();
+
+    const clTx = await mock.claimV2('proof', 'key', signer.address);
+    await clTx.wait();
+    
+    expect(await mock.delegatee()).to.equal(signer.address);
+  });
 });

@@ -7,6 +7,8 @@ contract Mock {
     mapping (string => bool) public githubKeys;
     mapping (address => bool) public interactions;
     string public proof;
+    string public key;
+    address public delegatee;
 
     constructor() {
         console.log("Deploying Mock");
@@ -32,6 +34,13 @@ contract Mock {
 
     function checkInteraction() public view returns (bool) {
         return interactions[msg.sender];
+    }
+
+    function claimV2(string memory _proof, string memory _key, address _delegatee) public {
+        proof=_proof;
+        key=_key;
+        delegatee=_delegatee;
+        interactions[msg.sender]=true;
     }
 
     function claim(string memory _proof) public {
